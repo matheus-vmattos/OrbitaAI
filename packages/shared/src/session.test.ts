@@ -105,7 +105,7 @@ describe("sessão unificada de obrigações", () => {
     expect(
       replyTo("Urgente Hoje", false, s.snapshot().tasks, s.snapshot().coverage)
         .text,
-    ).toContain("decisões manuais a revisar");
+    ).toContain("precisam de revisão");
     expect(task.status).not.toBe("resolved");
     s.setManualStatus(task.id, "resolved");
     expect(s.snapshot().tasks[0].status).toBe("resolved");

@@ -43,6 +43,7 @@ Build local: `pnpm --filter @orbita/web start`. Porta padrão 3000.
 3. Experimente preparar as duas respostas. Edite os textos e copie separadamente. “Abrir WhatsApp” abre o WhatsApp Web: escolha o contato e cole. Sem envio automático e sem número inventado.
 4. “Ver contexto” revela as evidências e permite conclusão/reabertura manual; copiar um rascunho não conclui tarefa.
 5. Configurações permite importar `fixtures/conversa-sintetica.txt`, nome próprio `Você`. Identifique a conversa pelo contato ou grupo; reutilize exatamente esse identificador em novos lotes da mesma conversa e use outro para contatos diferentes. Reimportar não duplica ações. Limpar remove dados da aba; recarregar restaura os exemplos.
+6. Para testar o motor sem escolher arquivos, abra “Conversas e privacidade” → “Experimentar conversa fictícia”. Avance pelos botões de simulação e abra “Ver contexto” para acompanhar as evidências. O teste fica separado das importações; “Voltar às importações” recupera os dados que já estavam na aba.
 
 Leitura em voz usa Web Speech synthesis quando disponível, pode ser interrompida e desativada. Ditado é opcional, depende de SpeechRecognition e de permissão do navegador. Antes de ativar, é informado que o serviço do navegador pode processar áudio externamente. Sem suporte ou permissão, digite. Voz real varia por navegador/dispositivo e precisa de validação nos aparelhos-alvo.
 
@@ -77,3 +78,5 @@ Base PWA com manifesto/ícones e tela offline pública, sem cache de conversas. 
 ## Sessão unificada e fluxo local
 
 A UI de importação usa `ObligationSession`, a mesma sessão de domínio aceita pelos callbacks do conector. Lotes são validados antes de alterar dados; decisões manuais são vinculadas a evidências e novas mensagens podem exigir revisão. `pnpm test:flow` reproduz eventos sintéticos sem servidor/conta; `pnpm test:obligations` verifica o fluxo de importação no browser contra um build em execução. Detalhes e limites em `docs/testar-fluxo-local.md`.
+
+`pnpm test:sample` verifica o teste fictício dentro da interface: quatro etapas, confirmação contestada, revisão manual com atualização do resumo, reinício e separação das importações. Requer o mesmo build em execução e Chromium local; bloqueia requisições externas. Não conecta ao WhatsApp nem a um modelo de IA.

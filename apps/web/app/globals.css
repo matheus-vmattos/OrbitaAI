@@ -460,6 +460,20 @@ a {
   padding: 32px;
   box-shadow: 0 30px 140px #0008;
 }
+.sample-guide {
+  margin: 20px 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.sample-guide p {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.sample-guide button {
+  text-align: left;
+}
 .settings-dialog::backdrop {
   background: #03080bce;
   backdrop-filter: blur(8px);

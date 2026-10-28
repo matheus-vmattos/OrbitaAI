@@ -11,7 +11,8 @@
     "benchmark:ai": "node --use-env-proxy scripts/benchmark-ai.mts",
     "test:mobile": "node scripts/verify-mobile.cjs",
     "test:flow": "vitest run packages/connectors/src/flow.test.ts --reporter=verbose",
-    "test:obligations": "node scripts/verify-obligations.cjs"
+    "test:obligations": "node scripts/verify-obligations.cjs",
+    "test:sample": "node scripts/verify-sample.cjs"
   },
   "devDependencies": {
     "vitest": "5.0.5",

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ObligationSession, type Coverage } from "@orbita/shared/session";
+import { sampleStages } from "./sample-conversation";
 import {
   ArrowUp,
   Check,
@@ -46,6 +47,38 @@ type SpeechWindow = Window & {
   SpeechRecognition?: new () => Recognition;
   webkitSpeechRecognition?: new () => Recognition;
 };
+
+function ingestExport(
+  text: string,
+  target: ObligationSession,
+  conversationName: string,
+  self: string,
+) {
+  if (!self.trim())
+    throw new Error("Informe seu nome como aparece no arquivo.");
+  if (!conversationName.trim())
+    throw new Error("Identifique o contato ou grupo da conversa.");
+  const result = parseExport(text);
+  if (!result.messages.length)
+    throw new Error(
+      "Formato não reconhecido. Use uma exportação brasileira em UTC−3.",
+    );
+  target.ingest(
+    result.messages.map((message) => ({
+      conversationId: conversationName.trim().toLocaleLowerCase("pt-BR"),
+      source: "export" as const,
+      message,
+      senderId: message.author,
+      displayName: message.author,
+      historical: true,
+      fromMe:
+        message.author.toLocaleLowerCase("pt-BR") ===
+        self.trim().toLocaleLowerCase("pt-BR"),
+    })),
+    { self, conversationLabel: conversationName.trim() },
+  );
+  return { ...result, snapshot: target.snapshot() };
+}
 
 function DraftCard({
   draft,
@@ -105,6 +138,10 @@ export default function Home() {
   const [self, setSelf] = useState("Você");
   const [conversationName, setConversationName] = useState("");
   const session = useRef(new ObligationSession({ workspaceId: "local-tab" }));
+  const sampleSession = useRef(
+    new ObligationSession({ workspaceId: "synthetic-tab" }),
+  );
+  const [sampleStep, setSampleStep] = useState<number | null>(null);
   const [coverage, setCoverage] = useState<Coverage>("unknown");
   const [evidence, setEvidence] = useState<string | null>(null);
   const dialog = useRef<HTMLDialogElement>(null);
@@ -135,7 +172,7 @@ export default function Home() {
       return;
     }
     const utterance = new SpeechSynthesisUtterance(
-      `${demo ? "No exemplo de demonstração. " : ""}${text}`,
+      `${demo || sampleStep !== null ? "No exemplo de demonstração. " : ""}${text}`,
     );
     utterance.lang = "pt-BR";
     utterance.onstart = () => setSpeaking(true);
@@ -229,37 +266,47 @@ export default function Home() {
       return false;
     }
   }
+  function runSample(step = 0) {
+    if (step === 0) sampleSession.current.clear();
+    const { snapshot } = ingestExport(
+      sampleStages[step].text,
+      sampleSession.current,
+      "Marina · teste fictício",
+      "Você",
+    );
+    reset();
+    setSampleStep(step);
+    setDemo(false);
+    setTasks(snapshot.tasks);
+    setCoverage(snapshot.coverage);
+    setLastQuery("Urgente Hoje");
+    setReply(replyTo("Urgente Hoje", false, snapshot.tasks, snapshot.coverage));
+    setPanel(null);
+    // Não inicia áudio ao trocar a fonte. O usuário pode tocar em “Ouvir”.
+  }
+  function showImports() {
+    const snapshot = session.current.snapshot();
+    reset();
+    setSampleStep(null);
+    setDemo(false);
+    setTasks(snapshot.tasks);
+    setCoverage(snapshot.coverage);
+    setPanel(null);
+  }
   async function importFile(file?: File) {
     if (!file) return;
     try {
       if (!file.name.toLowerCase().endsWith(".txt") || file.size > 1_000_000)
         throw new Error("Escolha um arquivo .txt de até 1 MB.");
-      if (!self.trim())
-        throw new Error("Informe seu nome como aparece no arquivo.");
-      if (!conversationName.trim())
-        throw new Error("Identifique o contato ou grupo da conversa.");
-      const result = parseExport(await file.text());
-      if (!result.messages.length)
-        throw new Error(
-          "Formato não reconhecido. Use uma exportação brasileira em UTC−3.",
-        );
-      const key = conversationName.trim().toLocaleLowerCase("pt-BR");
-      session.current.ingest(
-        result.messages.map((message) => ({
-          conversationId: key,
-          source: "export" as const,
-          message,
-          senderId: message.author,
-          displayName: message.author,
-          historical: true,
-          fromMe:
-            message.author.toLocaleLowerCase("pt-BR") ===
-            self.trim().toLocaleLowerCase("pt-BR"),
-        })),
-        { self, conversationLabel: conversationName.trim() },
+      const result = ingestExport(
+        await file.text(),
+        session.current,
+        conversationName,
+        self,
       );
-      const snapshot = session.current.snapshot();
+      const { snapshot } = result;
       reset();
+      setSampleStep(null);
       setTasks(snapshot.tasks);
       setCoverage(snapshot.coverage);
       setDemo(false);
@@ -310,9 +357,11 @@ export default function Home() {
           <button className="source-button" onClick={() => setPanel("data")}>
             {demo
               ? "Demonstração"
-              : coverage === "unknown"
-                ? "Sem dados"
-                : "Histórico parcial"}
+              : sampleStep !== null
+                ? "Teste fictício"
+                : coverage === "unknown"
+                  ? "Sem dados"
+                  : "Histórico parcial"}
           </button>
           <button
             className="icon-button"
@@ -389,11 +438,33 @@ export default function Home() {
                 <RotateCcw size={14} />
               </button>
             </div>
+            {sampleStep !== null && (
+              <aside
+                className="sample-guide"
+                aria-label="Teste de conversa fictícia"
+              >
+                <p>
+                  Conversa fictícia · etapa {sampleStep + 1} de {sampleStages.length}
+                </p>
+                <button
+                  className="secondary-button"
+                  onClick={() => runSample((sampleStep + 1) % sampleStages.length)}
+                >
+                  {sampleStages[sampleStep + 1]?.action ??
+                    "Recomeçar teste fictício"}
+                </button>
+              </aside>
+            )}
             {evidence && (
               <div className="evidence">
                 {demo ? (
                   <p>
                     Exemplo fictício do João. Nada foi lido do seu WhatsApp.
+                  </p>
+                ) : sampleStep !== null ? (
+                  <p>
+                    Conversa fictícia de 27/10/2026. Regras locais, sem WhatsApp ou
+                    IA conectados.
                   </p>
                 ) : (
                   <p>
@@ -431,18 +502,34 @@ export default function Home() {
                     )}
                     <button
                       onClick={() => {
-                        const status =
+                        const status: "open" | "resolved" =
                           task.status === "resolved" ? "open" : "resolved";
                         if (demo) {
-                          setTasks((items) =>
-                            items.map((t) =>
-                              t.id === task.id ? { ...t, status } : t,
-                            ),
+                          const updated = tasks.map((t) =>
+                            t.id === task.id ? { ...t, status } : t,
                           );
+                          setTasks(updated);
+                          if (!reply.drafts)
+                            setReply(replyTo(lastQuery, true, updated, coverage));
                         } else {
-                          session.current.setManualStatus(task.id, status);
-                          setTasks(session.current.snapshot().tasks);
+                          const target =
+                            sampleStep === null
+                              ? session.current
+                              : sampleSession.current;
+                          target.setManualStatus(task.id, status);
+                          const snapshot = target.snapshot();
+                          setTasks(snapshot.tasks);
+                          if (!reply.drafts)
+                            setReply(
+                              replyTo(
+                                lastQuery,
+                                false,
+                                snapshot.tasks,
+                                snapshot.coverage,
+                              ),
+                            );
                         }
+                        silence();
                       }}
                     >
                       {task.status === "resolved"
@@ -522,9 +609,11 @@ export default function Home() {
         <p className="source-caption">
           {demo
             ? "Exemplo do João · sem WhatsApp conectado"
-            : coverage === "unknown"
-              ? "Sem conversas importadas"
-              : "Exportação parcial · sem atualização automática"}
+            : sampleStep !== null
+              ? "Conversa fictícia · sem WhatsApp ou IA conectados"
+              : coverage === "unknown"
+                ? "Sem conversas importadas"
+                : "Exportação parcial · sem atualização automática"}
         </p>
       </div>
       <dialog
@@ -573,9 +662,24 @@ export default function Home() {
             <Orbit className="dialog-symbol" />
             <h2>Conversas e privacidade</h2>
             <p>
-              Este protótipo usa um roteiro local do João. Não há IA, conta real
-              ou envio de mensagens.
+              Use o exemplo do João, teste uma conversa fictícia ou importe um TXT.
+              Não há IA conectada ou envio de mensagens.
             </p>
+            <section>
+              <h3>Testar sem arquivos</h3>
+              <p>
+                Simule pedido, envio, confirmação e correção. O teste fica separado
+                das suas importações.
+              </p>
+              <button className="secondary-button" onClick={() => runSample()}>
+                Experimentar conversa fictícia
+              </button>
+              {sampleStep !== null && (
+                <button className="text-button" onClick={showImports}>
+                  Voltar às importações
+                </button>
+              )}
+            </section>
             <section>
               <h3>Instalar no celular</h3>
               <p>
@@ -621,6 +725,8 @@ export default function Home() {
                   reset();
                   setTasks([]);
                   session.current.clear();
+                  sampleSession.current.clear();
+                  setSampleStep(null);
                   setCoverage("unknown");
 
                   setDemo(false);
@@ -636,6 +742,8 @@ export default function Home() {
                   reset();
                   setTasks(joaoTasks);
                   session.current.clear();
+                  sampleSession.current.clear();
+                  setSampleStep(null);
                   setCoverage("unknown");
 
                   setDemo(true);

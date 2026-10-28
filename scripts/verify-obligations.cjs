@@ -54,7 +54,7 @@ const base = process.env.ORBIT_TEST_URL || "http://localhost:3000";
     await page.getByRole("button", { name: "Marcar como concluída" }).waitFor();
     await page
       .locator(".spoken-answer")
-      .filter({ hasText: "decisões manuais a revisar" })
+      .filter({ hasText: "precisam de revisão" })
       .waitFor();
     if (
       await page.evaluate(

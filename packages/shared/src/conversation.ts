@@ -48,7 +48,7 @@ export function replyTo(
         "Há fontes desconectadas; mensagens recentes podem estar faltando.",
     }[coverage] +
     (tasks.some((t) => t.requiresReview)
-      ? " Há decisões manuais a revisar após novas mensagens."
+      ? " Há pendências que precisam de revisão após novas mensagens."
       : "");
   const q = command.toLocaleLowerCase("pt-BR");
   if (
