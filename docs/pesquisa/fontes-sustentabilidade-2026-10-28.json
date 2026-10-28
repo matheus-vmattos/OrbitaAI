@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-28",
+  "purpose": "architecture_review_not_load_test",
+  "snapshots": [
+    {
+      "file": "baileys.txt",
+      "sha256": "8e04fbb1c4c5a6a0e1d2e9a70621de9836334e109f9808291d2ccbc1f1d3d18a",
+      "bytes": 44212
+    },
+    {
+      "file": "cf-ai-data.txt",
+      "sha256": "e76df1e96054efc88b28bf1feb4057b7638a5509d5ab983bdd17069135c72ad7",
+      "bytes": 3750
+    },
+    {
+      "file": "cf-ai-pricing.txt",
+      "sha256": "4fc5ecfdd85c435770f134896bc4ad5db3b901e2fac3b100d56286225ac5504f",
+      "bytes": 20726
+    },
+    {
+      "file": "cf-websockets.txt",
+      "sha256": "1caaef431440ba7837abc25119706a55bb88b1b3e1c6b58275f4078956695418",
+      "bytes": 24962
+    },
+    {
+      "file": "cf-workers-limits.txt",
+      "sha256": "707eb71f26a93061771979b386ebce8374680f64864d61f750d20f265ec62a3e",
+      "bytes": 22880
+    },
+    {
+      "file": "expo-monorepo.txt",
+      "sha256": "40ce0ae8341ebd8e79e7f3ce5c065b6d4f74e274685dfabf8d7bfa2bb7c2856f",
+      "bytes": 17485
+    },
+    {
+      "file": "expo-pwa.txt",
+      "sha256": "15ac89443726961b60169d955d2e7a9a68381012b1b9a0aae76771432010fba7",
+      "bytes": 12151
+    },
+    {
+      "file": "meta-api.txt",
+      "sha256": "c473aa10b1dd0678645919c45cc36f0269b3f0e677a21970eb485fc7d6bdf202",
+      "bytes": 2440
+    },
+    {
+      "file": "supabase-backup.txt",
+      "sha256": "3ec0526e7dab1e41349d128410c9d80e3b23ea85af87bf04b828ea206b8e4398",
+      "bytes": 8898
+    },
+    {
+      "file": "supabase-queues.txt",
+      "sha256": "b040e525ca96ea0240be886605ee8d5c17fe1a1807bc47d4a964595f81bfea10",
+      "bytes": 1681
+    },
+    {
+      "file": "supabase-rls.txt",
+      "sha256": "db2c28e9c9b0c04bff7cea9155402869c43f435b03124e42ca7640a8deedff4a",
+      "bytes": 30648
+    }
+  ]
+}

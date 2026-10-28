@@ -1,0 +1,20 @@
+{
+  "name": "orbita-ai",
+  "private": true,
+  "packageManager": "pnpm@11.25.0",
+  "scripts": {
+    "dev": "pnpm --filter @orbita/web dev",
+    "build": "pnpm --filter @orbita/web build",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "test": "vitest run",
+    "lint": "pnpm --filter @orbita/web lint",
+    "benchmark:ai": "node --use-env-proxy scripts/benchmark-ai.mts",
+    "test:mobile": "node scripts/verify-mobile.cjs",
+    "test:flow": "vitest run packages/connectors/src/flow.test.ts --reporter=verbose",
+    "test:obligations": "node scripts/verify-obligations.cjs"
+  },
+  "devDependencies": {
+    "vitest": "5.0.5",
+    "playwright": "1.62.1"
+  }
+}

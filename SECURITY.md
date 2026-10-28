@@ -1,0 +1,13 @@
+# Segurança e privacidade
+
+Esta versão não tem contas, banco, API externa ou persistência de conversas. React renderiza texto importado sem HTML; o upload é limitado a 1 MB antes da leitura, com limite acumulado por aba de 5 mil mensagens ou 5 MB. Mensagens importadas e evidências são mantidas temporariamente na memória para conciliar lotes; não são enviadas ao servidor. Não há envio automático de mensagens. O microfone só é iniciado por ação explícita após aviso de consentimento. Ditado e leitura usam recursos nativos do navegador, que podem depender de serviços externos; não prometer que o áudio fica no dispositivo. Ao sair da tela, a captura é encerrada. Não guardar dados pessoais em fixtures ou logs.
+
+Dados ficam em memória e podem ser limpos em Preferências. Recarregar descarta a importação. Isso não promete eliminação de cópias do arquivo original, memória do navegador ou backups do dispositivo. Use somente exportações autorizadas; terceiros também têm direitos sobre suas mensagens.
+
+Antes de produção: consentimento, política LGPD revisada, autenticação, autorização multi-tenant, RLS testada por operação, exclusão/exportação de dados, retenção verificável, validação no servidor, rate limit, limites de ZIP e criptografia. Nenhuma dessas capacidades está validada por este protótipo.
+
+O backend experimental de IA não é exposto por rota pública. Token Cloudflare é lido somente no CLI backend, nunca no navegador. O benchmark real aceita apenas os fixtures sintéticos definidos no código; não registrar tokens ou conteúdo do provedor. SQLite local de teste não implementa autenticação, RLS ou orçamento distribuído. Antes de integrar usuários reais, esses controles são obrigatórios; a partição por `workspaceId` do cache não autoriza acesso.
+
+O service worker da PWA grava apenas ícones e `/offline.html`; navegações da aplicação, conversas, API e tokens ficam fora de seu cache. Nenhum push, captura em segundo plano ou permissão de microfone é iniciado pela instalação. A ponte de recebimento não expõe operação de envio e permanece sem transporte/credenciais reais; QR de teste é descartado pelo status. Instalação e fonte de dados não concedem acesso a outras contas.
+
+A sessão de domínio valida lotes atomicamente e recusa mudança silenciosa do conteúdo de uma mensagem já conhecida. `clear` remove suas mensagens, nomes, cobertura e decisões da memória da aba. Separação entre instâncias/abas não é prova de isolamento multiusuário em banco. Identificadores de conversa/escopo precisam ser derivados de autorização no futuro backend, e não aceitos como credenciais do cliente.

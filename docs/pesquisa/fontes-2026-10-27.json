@@ -1,0 +1,183 @@
+{
+  "consulted_date": "2026-10-27",
+  "status": "partial_direct_commercial_sites_blocked",
+  "revisions_observed": {
+    "cloudflare-docs": {
+      "repo": "cloudflare/cloudflare-docs",
+      "branch": "production",
+      "commit": "d57d195ee99ea8ffca6b5b9ee4bc763a08fa7a38"
+    },
+    "supabase": {
+      "repo": "supabase/supabase",
+      "branch": "master",
+      "commit": "c4424c97952e95640e1b4e1d1b307dcb7b688be4"
+    },
+    "openclaw": {
+      "repo": "openclaw/openclaw",
+      "branch": "main",
+      "commit": "12bb61686cc759fbfbc4e9005d48689ede39a1c9"
+    },
+    "nanoclaw": {
+      "repo": "qwibitai/nanoclaw",
+      "branch": "main",
+      "commit": "acc2b1c8f52a954368cfaf04b61c32f9a1efc280"
+    },
+    "beeper": {
+      "repo": "beeper/bridge-manager",
+      "branch": "main",
+      "commit": "d04569b64f21d495e75eae08b784ded325a33839"
+    },
+    "baileys": {
+      "repo": "WhiskeySockets/Baileys",
+      "branch": "master",
+      "commit": "81345beb67ca3fb0eb79a2c20cd4ac24da517929"
+    },
+    "openai-cookbook": {
+      "repo": "openai/openai-cookbook",
+      "branch": "main",
+      "commit": "a8132ca2f7a5de3a6cf15d9e79d172787b42b697"
+    }
+  },
+  "snapshots": [
+    {
+      "name": "baileys.txt",
+      "sha256": "8e04fbb1c4c5a6a0e1d2e9a70621de9836334e109f9808291d2ccbc1f1d3d18a",
+      "bytes": 44212
+    },
+    {
+      "name": "beeper-bridges.txt",
+      "sha256": "e72aff60e1f890423eb44d7ea9f30d40243d62f6144181bdc25e1d029ed424d7",
+      "bytes": 9645
+    },
+    {
+      "name": "cloudflare-pricing.txt",
+      "sha256": "4fc5ecfdd85c435770f134896bc4ad5db3b901e2fac3b100d56286225ac5504f",
+      "bytes": 20726
+    },
+    {
+      "name": "cloudflare-structured.txt",
+      "sha256": "634f5cfc5d4442d71f98c0f519f5dcfa6c8189205dc6e0fa717d3dcbf4cd6b03",
+      "bytes": 3759
+    },
+    {
+      "name": "cloudflare-worker-pricing.txt",
+      "sha256": "433c1ef43e3adc53b7272a02b0ddb893f9514ac99c949635f7ff90423f819d75",
+      "bytes": 18602
+    },
+    {
+      "name": "gemini-cookbook.txt",
+      "sha256": "b75c8d874948caf31042766bdb4abcebc8959d9a8d424c7c3ec7fdc3070cf669",
+      "bytes": 24691
+    },
+    {
+      "name": "gemini-cost.txt",
+      "sha256": "969c85dcd67ed107706c7e1159a464f8570578e07d2c7b05d7fa8e6c2b6f64a7",
+      "bytes": 15755
+    },
+    {
+      "name": "mautrix-license.txt",
+      "sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0",
+      "bytes": 34523
+    },
+    {
+      "name": "mautrix-whatsapp.txt",
+      "sha256": "5606da7a13cf4e78c44df721625585011870f73f022dc8721452b396ed3335fe",
+      "bytes": 748
+    },
+    {
+      "name": "meta-cloud.txt",
+      "sha256": "c473aa10b1dd0678645919c45cc36f0269b3f0e677a21970eb485fc7d6bdf202",
+      "bytes": 2440
+    },
+    {
+      "name": "nanobot.txt",
+      "sha256": "02dbc8e44a919b942e7c953f5a32ad755bb7d80e91b1a3742c3ead60b28bdd2c",
+      "bytes": 92090
+    },
+    {
+      "name": "nanoclaw-license.txt",
+      "sha256": "d20135a5de128506f70407bdcd22f8c49862187a5c46da81b34b9ed91085a480",
+      "bytes": 1064
+    },
+    {
+      "name": "nanoclaw.txt",
+      "sha256": "b901948015136cc762a2960bb3ea0a49653fbea228ed3467e0dd26d609599272",
+      "bytes": 18669
+    },
+    {
+      "name": "ollama.txt",
+      "sha256": "9e5a7d406950fdd2742084065ab38a3ea09b5aab5e2f13ef7d64147229ae0d8b",
+      "bytes": 19347
+    },
+    {
+      "name": "openai-cache.txt",
+      "sha256": "2f1e5fea7989d37dacf702c2ef4059e12f42b21dbf937d6a4e0eecb19b88ab12",
+      "bytes": 31169
+    },
+    {
+      "name": "openai-node.txt",
+      "sha256": "8cf814b6f272f795797087128d04669ad8bf8ea4521284128d486cf210f44303",
+      "bytes": 33002
+    },
+    {
+      "name": "openclaw-license.txt",
+      "sha256": "9efd316ecf1c4c60f6fd5d26433142fff2b6794d7d328e9bc6179b29bf9c82a4",
+      "bytes": 1076
+    },
+    {
+      "name": "openclaw.txt",
+      "sha256": "4089a47c2c351a632c156bfce300b1c10585a6c174efc67b41ec52c26d85e0f9",
+      "bytes": 113209
+    },
+    {
+      "name": "supabase-cli.txt",
+      "sha256": "93ee0c022a04202a1b8817364961dbadf45bf511287dcb572eb29b47750b482d",
+      "bytes": 5572
+    },
+    {
+      "name": "supabase-cost-control.txt",
+      "sha256": "0ed9024ce9d88418b426034e66edb190c695a961a809d3fdc1b792d72dcfb8fb",
+      "bytes": 4271
+    },
+    {
+      "name": "supabase-local.txt",
+      "sha256": "9a7298ead69dd049baebb3044ce2ca070d526bf97b488f1e4a7259896736635f",
+      "bytes": 6060
+    },
+    {
+      "name": "supabase-mau.txt",
+      "sha256": "e7c597b2c78cf98a5a759fb5067b789de5d7f3847df4376f357aebaa9f301c7b",
+      "bytes": 4583
+    },
+    {
+      "name": "supabase-pausing.txt",
+      "sha256": "6b6638750ec33715cba8b29734474bb43172bc7a36818eeacdf72e713ab23f0b",
+      "bytes": 2585
+    },
+    {
+      "name": "supabase-plans-content.txt",
+      "sha256": "9b1dbdea97f72de7750fc697a228753e5f95a438a49a5d699473637d851a9ef5",
+      "bytes": 449
+    },
+    {
+      "name": "supabase-pricing-content.txt",
+      "sha256": "5159fd251c0d17dbe54e4cbc755856f6e73c3c9b10dd93109d91acf94f79cbea",
+      "bytes": 3953
+    },
+    {
+      "name": "supabase-queue.txt",
+      "sha256": "b040e525ca96ea0240be886605ee8d5c17fe1a1807bc47d4a964595f81bfea10",
+      "bytes": 1681
+    },
+    {
+      "name": "supabase-selfhost.txt",
+      "sha256": "b326e2a0de29f02e3c109cf5008872a4764a5f1048ec44e343634f42258614ac",
+      "bytes": 5267
+    },
+    {
+      "name": "whatsmeow.txt",
+      "sha256": "027b3da3b6d4d914ace426715b3cda7cf3365c27b704b400fb58a34e74864d99",
+      "bytes": 1469
+    }
+  ]
+}
