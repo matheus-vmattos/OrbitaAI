@@ -25,6 +25,8 @@ Em 28/10/2026, o dono autorizou começar a versionar e enviar o trabalho ao repo
 ## Como o Codex trabalha
 Usar checkout existente, comandos do README e testes de domínio. Relatar limitações e falhas com precisão.
 
+Em 30/10/2026, o dono pediu conectar Claude e solicitar opinião às 14h10 (America/Sao_Paulo), e confirmou ter Pro/Max. Foram preparados `CLAUDE.md`, `/opiniao-orbitai`, pedido de revisão e guia Windows. Não há CLI Claude/autenticação nem ferramenta de agendamento nesta sessão; nenhum parecer foi solicitado ou recebido e nenhuma tarefa futura foi marcada. Login depende do dono. A assinatura existente não autoriza uso extra/API paga. Codex continua responsável por avaliar recomendações; não confundir preparo dos arquivos com conexão realizada.
+
 ## Próximas prioridades
 Cenário visual base aprovado pelo dono; polimento visual adiado. Próximo marco: concluir benchmark real de IA após configurar acesso Cloudflare, então autenticação e isolamento Supabase com RLS testada. Pesquisa de custo propõe avaliar fila PostgreSQL/pgmq antes de adicionar Redis. Importação ZIP segura, adaptação de modelo e integração na UI permanecem pendentes. A base PWA está preparada; falta validação real de instalação/voz nos aparelhos suportados. Integração WhatsApp real permanece ausente.
 

@@ -4,6 +4,7 @@ Protótipo conversacional do assistente “O que precisa de mim agora?”. Visua
 
 ## Guias
 
+- [Primeiro teste no PC e revisão com Claude](docs/primeiro-teste-pc-e-claude.md): instalação no Windows, assinatura existente e pedido de opinião sem alterações.
 - [Fluxo local e testes de pendências](docs/testar-fluxo-local.md): o que já funciona e como reproduzir os testes sem conta externa.
 - [Android e iPhone](docs/testar-mobile.md): base PWA, instalação futura e verificações ainda pendentes nos aparelhos.
 - [Configurar Cloudflare](docs/configurar-cloudflare.md): preparação para uma etapa futura; não é necessária para os testes locais.
